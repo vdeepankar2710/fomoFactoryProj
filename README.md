@@ -1,1 +1,1 @@
-# fomoFactrryProj
+# fomoFactoryProj
