@@ -1,0 +1,4 @@
+export const TYPES = {
+    STOCK_ACTION: 'STOCK_ACTION',
+    STOCK_SYMBOL:'STOCK_SYMBOL'
+}
