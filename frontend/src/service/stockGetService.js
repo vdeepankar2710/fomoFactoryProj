@@ -4,7 +4,12 @@ const url = 'http://localhost:5000';
 
 export const getStocks = async (item) => { 
     try {
-        let response = await axios.get(`${url}/api/stocks?symbol=${item}`)
+        console.log("item in get", item)
+        let response = await axios.get(`${url}/api/stocks`, {
+            params: {
+                symbol:item.value
+            }
+        })
         return response;
     } catch (err) {
         return err;

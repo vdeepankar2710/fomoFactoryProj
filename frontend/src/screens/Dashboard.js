@@ -5,27 +5,27 @@ import { connect } from 'react-redux';
 import { stockAction, stockSymbolAction } from '../actions/actions';
 import { options } from '../constants/common-constants';
 import Select from 'react-select'
+import DisplayTable from '../components/DisplayTable'
+
 
 function Dashboard(props) {
-    // console.log('props in Main container',props);
+    console.log('props in Main container',props);
     const [selectedStockSymbol, setSelectedStockSymbol] = useState(options[0]);
     const handleSymbolSelect = (item) => {
         setSelectedStockSymbol(item);
     }
     useEffect(() => {
-
-        getStocks(selectedStockSymbol.name ||"").then((res) => {
-            console.log("res from alert actions API", res);
-            // setAlertActionsLoading(false)
-            if (res.data && res.data.data) {
+        getStocks(selectedStockSymbol||"").then((res) => {
+            if (res.data && res.data.stocks) {
                 console.log("res in alert if", res.data.data);
-                // setAlertActionsCount(res.data.data.length);
-                props.alertAction(res.data.data)    
+                props.stockAction([...res.data.stocks])    
             }
         }).catch((err) => {
             throw err
         })
     }, [selectedStockSymbol])
+
+
 
     return (
         <div className='dashboard'>
@@ -34,15 +34,19 @@ function Dashboard(props) {
                 defaultValue={selectedStockSymbol}
                 onChange = {(item)=>handleSymbolSelect(item)}
             />
+            <DisplayTable
+                tableData={props.stockArr}
+                // tableheaders={}
+            />
         </div>
     )
 }
 
-
 const mapStateToProps = (state) => {
-    console.log("state",state)
+    // console.log("state",state)
    return {
-        stockSymbol:state
+    //    stockSymbol: state,
+       stockArr: state.stocks && state.stocks.stocks && state.stocks.stocks.stock
    };
 };
 const mapDispatchToProps = (dispatch) => {

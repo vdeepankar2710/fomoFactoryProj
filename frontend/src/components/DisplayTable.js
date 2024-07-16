@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './DisplayTable.scss'
-import DisplayPopup from './DisplayPopup.css';
+import './DisplayTable.css'
 
 export default function DisplayTable(props) {
 
@@ -19,7 +18,7 @@ export default function DisplayTable(props) {
                         );
                     })}
                     {props.tableData && props.tableData.map((rowData, rowCount) =>
-                        <tr key={`row-${rowCount}`} onClick={()=>handleRowClick(rowData)}>
+                        <tr key={`row-${rowCount}`}>
                             {props.tableHeaders &&
                                 props.tableHeaders.map((header, count) =>
                                 {
