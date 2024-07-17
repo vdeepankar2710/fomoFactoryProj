@@ -21,7 +21,7 @@ export const getStocks = async (req: Request, res: Response) => {
         .status(404)
         .json({ message: "No stocks found for the provided symbol" });
     }
-    console.log("stocks", stocks);
+    // console.log("stocks", stocks);
 
     res.status(200).json({ stocks: stocks });
   } catch (err) {

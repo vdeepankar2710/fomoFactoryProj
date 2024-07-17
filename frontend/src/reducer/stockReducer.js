@@ -5,11 +5,11 @@ export const stockReducer = (state = initialState, action) => {
     switch (action.type) {
         case TYPES.STOCK_ACTION: {
             let payload = action.payload
-               console.log("payload type", payload);
+            //    console.log("payload in reducer", payload);
             if (payload.length === 0) return state;
             return {
                 ...state,
-                stock: action.payload
+                stock: [...action.payload]
             }
         }
         case TYPES.STOCK_SYMBOL: {

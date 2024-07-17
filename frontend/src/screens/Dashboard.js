@@ -3,7 +3,7 @@ import './Dashboard.css';
 import { getStocks } from '../service/stockGetService';
 import { connect } from 'react-redux';
 import { stockAction, stockSymbolAction } from '../actions/actions';
-import { options } from '../constants/common-constants';
+import { options, headers } from '../constants/common-constants';
 import Select from 'react-select'
 import DisplayTable from '../components/DisplayTable'
 
@@ -14,17 +14,28 @@ function Dashboard(props) {
     const handleSymbolSelect = (item) => {
         setSelectedStockSymbol(item);
     }
-    useEffect(() => {
+
+    const handleStockGet = () => {
         getStocks(selectedStockSymbol||"").then((res) => {
             if (res.data && res.data.stocks) {
-                console.log("res in alert if", res.data.data);
                 props.stockAction([...res.data.stocks])    
             }
         }).catch((err) => {
             throw err
         })
+    } 
+
+    useEffect(() => {
+        handleStockGet()
     }, [selectedStockSymbol])
 
+    useEffect(() => {
+        setInterval(() => {
+        handleStockGet()
+        }, 5000) 
+    }, [])
+
+    
 
 
     return (
@@ -35,8 +46,8 @@ function Dashboard(props) {
                 onChange = {(item)=>handleSymbolSelect(item)}
             />
             <DisplayTable
-                tableData={props.stockArr}
-                // tableheaders={}
+                tableData={props.stockArr || []}
+                tableHeaders={headers}
             />
         </div>
     )
@@ -45,8 +56,7 @@ function Dashboard(props) {
 const mapStateToProps = (state) => {
     // console.log("state",state)
    return {
-    //    stockSymbol: state,
-       stockArr: state.stocks && state.stocks.stocks && state.stocks.stocks.stock
+       stockArr: state.stocks && state.stocks.stock
    };
 };
 const mapDispatchToProps = (dispatch) => {

@@ -1,4 +1,5 @@
 .display-table-container {
+  height: 100%;
 }
 .table-container {
   min-width: 90%;
@@ -19,8 +20,4 @@ th {
 }
 td {
   cursor: pointer;
-}
-td::after {
-  content: "\a";
-  white-space: pre;
 }

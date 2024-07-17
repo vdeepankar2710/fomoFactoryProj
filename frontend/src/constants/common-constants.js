@@ -7,3 +7,9 @@ export const options = [
 ]
 
 export const STOCK_IDS = ["01coin", "0chain", "0-mee", "0x404", "0vm"];
+
+export const headers = [
+  { id:1,name: 'timestamp', label: 'TimeStamp' },
+  { id:2, name: 'price', label: 'Price (USD)' },
+  
+]
