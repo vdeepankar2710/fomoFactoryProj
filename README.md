@@ -8,9 +8,9 @@ This project is a real-time stock and cryptocurrency tracker that fetches data f
 
 ## Technologies Used
 
-## Backend: Node.js, Express, MongoDB
+## Backend: TypeScript, Express, MongoDB
 
-## Frontend: React, TypeScript, Redux
+## Frontend: React, Redux
 
 ## State Management: Redux without localStorage
 
